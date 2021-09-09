@@ -47,7 +47,10 @@
 
     setInterval(getTime, 1000);
 
-    document.querySelector(".reset").addEventListener("click", game);
+    document.querySelector(".reset").addEventListener("click", () => {
+      game();
+      result.innerText = "";
+    });
 
     const result = document.querySelector(".result");
 
