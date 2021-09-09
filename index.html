@@ -18,42 +18,60 @@
     <h6>Guess which block has the gold coin.</h6>
     <div class="grid">
       <div class="coin"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
+      <div class="block" index="00"></div>
+      <div class="block" index="01"></div>
+      <div class="block" index="02"></div>
+      <div class="block" index="10"></div>
+      <div class="block" index="11"></div>
+      <div class="block" index="12"></div>
+      <div class="block" index="20"></div>
+      <div class="block" index="21"></div>
+      <div class="block" index="22"></div>
     </div>
+    <h6 class="result"></h6>
     <button class="reset">Reset</button>
   </body>
   <script>
-    line = document.querySelector(".started");
-    start = new Date(1631131287302);
-    now = new Date();
-    elasped = now - start;
-    hours = Math.floor(elasped / (1000 * 60 * 60));
-    minutes = Math.floor(elasped / (1000 * 60)) - hours * 60;
-    seconds = Math.floor(elasped / 1000) - (hours * 60 * 60 + minutes * 60);
-    console.log(hours * 60 * 60, Math.floor(elasped / 1000));
-    line.innerText = `Website started ${hours}:${minutes}:${seconds} ago.`;
+    const line = document.querySelector(".started");
+    const start = new Date(1631131287302);
+
+    function getTime() {
+      let now = new Date();
+      let elasped = now - start;
+      let hours = Math.floor(elasped / (1000 * 60 * 60));
+      let minutes = Math.floor(elasped / (1000 * 60)) - hours * 60;
+      let seconds =
+        Math.floor(elasped / 1000) - (hours * 60 * 60 + minutes * 60);
+      line.innerText = `Website started ${hours}:${minutes}:${seconds} ago.`;
+    }
+
+    setInterval(getTime, 1000);
 
     document.querySelector(".reset").addEventListener("click", game);
 
+    const result = document.querySelector(".result");
+
+    let ran0, ran1;
     function game() {
       ran0 = Math.floor(Math.random() * 3);
       ran1 = Math.floor(Math.random() * 3);
-      coin = document.querySelector(".coin");
+      const coin = document.querySelector(".coin");
       coin.style.left = `${50 * ran0 + 19}px`;
       coin.style.transform = `translateY(${50 * ran1 + 10}px)`;
 
-      blocks = document.querySelectorAll(".block");
+      const blocks = document.querySelectorAll(".block");
       blocks.forEach((block) => {
         block.style.backgroundColor = "#000000";
         block.addEventListener("click", () => {
+          if (
+            block.getAttribute("index") ===
+            ran1.toString() + ran0.toString()
+          ) {
+            result.innerText = "You won!";
+          } else {
+            result.innerText = "You lost!";
+          }
+
           block.style.backgroundColor = "transparent";
         });
       });
