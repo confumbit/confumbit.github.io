@@ -12,7 +12,7 @@
     <a href="https://www.linkedin.com/in/hiten-dalmia-9803851b5/">LinkedIn</a>
     <div style="height: 200px; width: 100%"></div>
     <h4>Play a game while you wait for me to finish the website.</h4>
-    <h5 class="started" id="started"></h5>
+    <h5 class="started" id="started" title="Time since the website's creation in DD:HH:MM:SS format."></h5>
     <br />
     <br />
     <h6>Guess which block has the gold coin.</h6>
@@ -37,12 +37,12 @@
 
     function getTime() {
       let now = new Date();
-      let elasped = now - start;
-      let hours = Math.floor(elasped / (1000 * 60 * 60));
-      let minutes = Math.floor(elasped / (1000 * 60)) - hours * 60;
-      let seconds =
-        Math.floor(elasped / 1000) - (hours * 60 * 60 + minutes * 60);
-      line.innerText = `Website started ${hours}:${minutes}:${seconds} ago.`;
+      let elasped = now - start + 36000000;
+      let days = Math.floor(elasped / (1000 * 60 * 60 * 24))
+      let hours = Math.floor(elasped / (1000 * 60 * 60)) - days * 24;
+      let minutes = Math.floor(elasped / (1000 * 60)) - ((days * 24 + hours) * 60);
+      let seconds = Math.floor(elasped / 1000) - ((((days * 24 + hours) * 60) + minutes) * 60);
+      line.innerText = `Website started ${days}:${hours}:${minutes}:${seconds} ago.`;
     }
 
     setInterval(getTime, 1000);
