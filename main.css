@@ -71,6 +71,102 @@ ol a:active {
   text-decoration: none;
 }
 
-ol li{
+ol li {
   margin-bottom: 16px;
+  font-weight: bold;
+}
+ol li:hover,
+ol li:active {
+  opacity: 0.8;
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger-box {
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-inner::before {
+  top: -8px;
+}
+
+.hamburger-inner::after {
+  bottom: -8px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    background: white;
+    flex-direction: column;
+    padding: 60px 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 999;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .nav-link {
+    width: auto;
+    text-align: left;
+    padding: 15px;
+  }
+
+  .hamburger.active .hamburger-inner {
+    transform: rotate(45deg);
+  }
+
+  .hamburger.active .hamburger-inner::before {
+    transform: translateY(8px) rotate(-90deg);
+  }
+
+  .hamburger.active .hamburger-inner::after {
+    opacity: 0;
+  }
 }
