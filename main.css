@@ -206,7 +206,7 @@ ol li:active {
   max-height: 320px;
   object-fit: contain;
   border-radius: 4px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.15));
 }
 
 .project-item-details {
