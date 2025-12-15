@@ -27,7 +27,7 @@
     <div class="content" style="align-items: flex-start">
       <h1>{{ page.title }}</h1>
       <h5>Published on {{page.date | date_to_string}}</h5>
-      <div style="padding: 16px 16px" markdown="0">{{ page.raw_content }}</div>
+      {{ content }}
     </div>
   </body>
 </html>
