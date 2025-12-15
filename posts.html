@@ -3,7 +3,6 @@ layout: default
 title: Math Posts
 ---
 
-<!-- content -->
 <div class="content" style="align-items: flex-start">
   <h1>Posts</h1>
   <ol>
@@ -15,22 +14,23 @@ title: Math Posts
   </ol>
   <h3>Articles</h3>
   <ol>
+    {% for article in site.data.math-articles %}
     <li>
-      <a href="/assets/pdf/comp_nals_article.pdf"
-        >On Computable Normed Almost Linear Spaces.
+      <a href="{{ article.src }}"
+        >{{ article.title }}.
         <span style="font-weight: 400; font-size: small"
-          >Author(s): Hiten Dalmia</span
+          >Author(s): {{ article.authors | join:", " }}</span
         >
       </a>
     </li>
-    <li>
-      <a href="/assets/pdf/comp-anal-sujit.pdf"
-        >Computable Analysis: Mathematical Foundations and Computability of Real
-        Functions Using the TTE Approach.
-        <span style="font-weight: 400; font-size: small"
-          >Author(s): Sujit Kumar, Hiten Dalmia</span
-        >
-      </a>
-    </li>
+    {% endfor %}
   </ol>
+  <!-- <h3>Projects</h3>
+  <ol>
+    {% for project in site.data.math-project %}
+    <li>
+      <a href="{{ project.src }}">{{ project.title }}. </a>
+    </li>
+    {% endfor %}
+  </ol> -->
 </div>
