@@ -1,0 +1,111 @@
+- name: Medicare Online Order
+  url: https://www.medicaregalaxy.in/
+  display_url: medicaregalaxy.in
+  image_path: /assets/p11.png
+  description:
+    - "Built a full-stack order placement portal for the company using NextJS with RESTful APIs."
+    - "Designed dual interfaces: customer-facing product ordering and an office-side order management system."
+    - "Designed the customer interface to display real-time product listings with current pricing and enable seamless order placement to logged-in users. The search feature is designed to perform a fuzzy-search on ~20,000 items."
+    - "The customer interface has Google Analytics and other custom analytics set up to track user behaviour, helping in planning future updates to the website."
+    - "Built the office interface as a comprehensive order management system, featuring employee assignment, activity logging, internal notes, and support for recurring orders."
+    - "Architected the system to ensure scalability, maintainability, and efficient data handling, leveraging PostgreSQL as the relational database."
+
+- name: Randomness Challenge
+  url: https://randomnesschallenge-71zq.onrender.com/
+  display_url: randomnesschallenge-71zq.onrender.com
+  image_path: /assets/p1.png
+  description:
+    - "A behavioural and statistical experiment that tests the ability of users to be random by asking them to click 6 identical buttons in a random fashion."
+    - "Uses different statistical methods to analyse the data collected, uses a REST API to store data in an Object Relational Database."
+
+- name: Cz Creation E-commerce Shop
+  url: https://czcreation.onrender.com/
+  display_url: czcreation.onrender.com
+  image_path: /assets/p2.jpg
+  description:
+    - "A fully fledged e-commerce website for a small business taking their products online."
+    - "It has user authentication using JWT tokens, CRUD operations like the ability to add items to cart, place orders, forgot password etc. implemented using a REST API."
+    - "Made using MERN stack, hosted on Heroku."
+
+- name: Shri Ram Consulting & Research Centre Website
+  url: https://www.srcrc.in/
+  display_url: srcrc.in
+  image_path: /assets/p5.png
+  description:
+    - "I made this homepage for SRCRC through the freelance agency - Fractal."
+    - "A one stop for all website for everything you could need to know about SRCRC, with a minimalistic, mordern and sleek design."
+    - "Made using NextJS, Typescript and TailwindCSS"
+
+- name: Medcheck
+  url: https://github.com/confumbit/medcheck
+  display_url: github.com/confumbit/medcheck
+  image_path: /assets/p8.jpeg
+  description:
+    - "An app for keeping track of your medicines. It alerts you whenever a medicine is low so you can go out to buy more!"
+    - "Made using React Native."
+
+- name: Fractal Homepage
+  url: https://fractalweb.netlify.app/
+  display_url: fractalweb.netlify.app
+  image_path: /assets/p7.png
+  description:
+    - "A ReactJS homepage for Fractal, a freelance media agency for whom I have previously worked on other projects."
+
+- name: Kombucha Product Placement
+  url: https://confumbit.github.io/dualite-work/
+  display_url: confumbit.github.io/dualite-work
+  image_path: /assets/p12.png
+  description:
+    - "A interactive web page made using vanilla Javascript with smooth and appealing animations to advertise products. Makes sure that the experience of looking at your creations is as fun as the products themselves."
+
+- name: a blog
+  url: https://ablogblog.onrender.com/
+  display_url: ablogblog.onrender.com
+  image_path: /assets/p10.png
+  description:
+    - "My blog that I run with 2 other people made using NodeJS and EJS templates."
+
+- name: Wedding Menu
+  url: https://confumbit.github.io/wedding-menu/
+  display_url: confumbit.github.io/wedding-menu
+  image_path: /assets/p3.jpg
+  description:
+    - "An elegant and light-weight application for a wedding buffet menu with a search feature."
+    - "Made using vanilla HTML, CSS and Javascript."
+
+- name: Treasty Social Gateway
+  url: https://confumbit.github.io/treasty-webpage/
+  display_url: confumbit.github.io/treasty-webpage
+  image_path: /assets/p4.jpg
+  description:
+    - "A single page application for a company to showcase their products and provide a consolidated portal for their customers to contact them."
+    - "Made using vanilla HTML, CSS and Javascript."
+
+- name: Kanye Fun
+  url: https://confumbit.github.io/kanye-fun/
+  display_url: confumbit.github.io/kanye-fun
+  image_path: /assets/p6.png
+  description:
+    - "A fun little project made with ReactJS using the kanye.rest API, to show Kanye's sacred words in a more decorated setting made while listening to Kanye's godly voice."
+
+- name: Burn
+  url: https://confumbit.github.io/burn-webpagedesigning-comp/
+  display_url: confumbit.github.io/burn-webpagedesigning-comp
+  image_path: /assets/p9.png
+  description:
+    - "A website for a fictional coal company, Burn, that I had developed for a web design competiton in my 11th grade."
+    - "Made using vanilla HTML, CSS and Javascript."
+
+- name: Breeze
+  url: https://github.com/confumbit/Breeze
+  display_url: github.com/confumbit/Breeze
+  image_path: null
+  description:
+    - "It is a simple python and tkinter application for attendance using OCR for google meet, it is optimized for a certain screen resolution but you could change that in the code."
+
+- name: Todoist
+  url: https://github.com/confumbit/todoist
+  display_url: github.com/confumbit/todoist
+  image_path: null
+  description:
+    - "A simple to-do application made using python and tkinter with mysql for data storage."

@@ -1,0 +1,23 @@
+- name: Home
+  url: /
+  target: _self
+
+- name: Math Posts
+  url: /posts.html
+  target: _self
+
+- name: Software Projects
+  url: /projects.html
+  target: _self
+
+- name: Curriculum Vitae
+  url: https://github.com/confumbit/academia-cv/blob/main/main.pdf
+  target: _blank
+
+- name: Resume
+  url: https://github.com/confumbit/resume-source-files/blob/main/main.pdf
+  target: _blank
+
+- name: '<img src="/assets/blog-logo.png" alt="blog-logo" style="height: 32px" />'
+  url: https://ablogblog.onrender.com/
+  target: _blank

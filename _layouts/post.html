@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="/assets/main.css"
+    />
+    <script src="/assets/script.js" defer></script>
+    <script
+      type="text/javascript"
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    ></script>
+  </head>
+  <body>
+    <!-- sidebar -->
+    {% include sidebar.html %}
+
+    <!-- content -->
+    <div class="content" style="align-items: flex-start">
+      <h1>{{ page.title }}</h1>
+      <h5>Published on {{page.date | date_to_string}}</h5>
+      <div style="padding: 16px 16px" markdown="0">{{ page.raw_content }}</div>
+    </div>
+  </body>
+</html>

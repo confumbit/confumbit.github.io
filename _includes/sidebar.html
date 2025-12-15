@@ -1,0 +1,17 @@
+<!-- sidebar -->
+<button class="hamburger" aria-label="Menu">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+<div class="sidebar">
+  {% for item in site.data.sidebar %}
+  <a
+    href="{{ item.url }}"
+    class="nav-link {% if page.url == item.url %}active{% endif %}"
+    target="{{ item.target }}"
+  >
+    {{ item.name }}
+  </a>
+  {% endfor %}
+</div>
