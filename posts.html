@@ -16,8 +16,12 @@ title: Math Posts
   <ol>
     {% for article in site.data.math-articles %}
     <li>
-      <a href="{{ article.src }}"
-        >{{ article.title }}.
+      <a href="{{ article.src }}">
+        {{ article.title }}.
+        <span style="font-weight: 400; font-style: italic; font-size: smaller"
+          >{{ article.journal }}</span
+        >
+        <br />
         <span style="font-weight: 400; font-size: small"
           >Author(s): {{ article.authors | join:", " }}</span
         >
