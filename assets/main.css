@@ -64,19 +64,19 @@ body {
 }
 
 /* math posts */
-ol a,
-ol a:visited,
-ol a:active {
+ol.title-list a,
+ol.title-list a:visited,
+ol.title-list a:active {
   color: black;
   text-decoration: none;
 }
 
-ol li {
+ol.title-list li {
   margin-bottom: 16px;
   font-weight: bold;
 }
-ol li:hover,
-ol li:active {
+ol.title-list li:hover,
+ol.title-list li:active {
   opacity: 0.8;
 }
 
