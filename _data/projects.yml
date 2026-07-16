@@ -10,6 +10,16 @@
     - "Built the office interface as a comprehensive order management system, featuring employee assignment, activity logging, internal notes, and support for recurring orders."
     - "Architected the system to ensure scalability, maintainability, and efficient data handling, leveraging PostgreSQL as the relational database."
 
+- name: Cross-platform AR App
+  url: null
+  display_url: null
+  image_path: null
+  description:
+    - "Led the development of the alpha release of a cross-platform augmented reality, location-aware mobile app made with Flutter for Android and iOS."
+    - "Developed an internal package for Flutter during the project, integrating the SIFT algorithm for feature matching via native C APIs and the OpenCV library into the Flutter ecosystem."
+    - "Built the UI from Figma designs and a RESTful API with the backend using Django."
+
+
 - name: Randomness Challenge
   url: https://randomnesschallenge-71zq.onrender.com/
   display_url: randomnesschallenge-71zq.onrender.com
