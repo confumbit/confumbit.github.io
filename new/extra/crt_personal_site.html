@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090b0d" />
+  <title>Your Name — Personal Site</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --signal-clarity: 0.18;
+      --screen-black: #050708;
+      --phosphor: #b9faff;
+      --phosphor-hot: #ff9bd8;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #1c1d1b;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      color: var(--phosphor);
+      font-family: "Courier New", "Lucida Console", monospace;
+      -webkit-font-smoothing: none;
+      text-rendering: geometricPrecision;
+      background:
+        radial-gradient(ellipse at 50% 45%, #343632 0%, #222421 42%, #101110 100%);
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* A restrained charcoal bezel frames the curved glass without turning the page
+       into a full product mock-up. */
+    .crt-shell {
+      position: relative;
+      width: min(97vw, 133.333svh);
+      aspect-ratio: 4 / 3;
+      padding: clamp(6px, 0.95vw, 14px);
+      border-radius: 3.2% / 4.6%;
+      background: linear-gradient(138deg, #777974 0%, #424440 12%, #1b1d1b 44%, #090a09 76%, #50524d 100%);
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.55),
+        0 4px 12px rgba(0, 0, 0, 0.75),
+        inset 0 1px 1px rgba(255, 255, 255, 0.28),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .crt-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      isolation: isolate;
+      border-radius: 4.2% / 6.4%;
+      background: var(--screen-black);
+      box-shadow:
+        inset 0 0 0 2px rgba(0, 0, 0, 0.94),
+        inset 0 0 22px rgba(0, 0, 0, 0.95),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+      animation: phosphor-flicker 6s infinite steps(1, end);
+    }
+
+    #static-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      width: 100%;
+      height: 100%;
+      opacity: 0.79;
+      mix-blend-mode: screen;
+      image-rendering: auto;
+    }
+
+    .screen-glass,
+    .scanlines,
+    .tracking-band {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .screen-glass {
+      z-index: 5;
+      border-radius: inherit;
+      background:
+        radial-gradient(ellipse at 50% 43%, transparent 42%, rgba(0, 0, 0, 0.12) 72%, rgba(0, 0, 0, 0.66) 100%),
+        linear-gradient(112deg, rgba(255,255,255,0.045), transparent 17%, transparent 81%, rgba(255,255,255,0.025));
+      box-shadow: inset 0 0 28px 8px rgba(0, 0, 0, 0.52);
+    }
+
+    .scanlines {
+      z-index: 4;
+      opacity: 0.62;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, 0.26) 3px,
+        rgba(0, 0, 0, 0.04) 4px
+      );
+    }
+
+    .tracking-band {
+      z-index: 3;
+      height: 23%;
+      inset: -24% 0 auto;
+      opacity: 0.22;
+      background: linear-gradient(to bottom, transparent, rgba(202, 250, 255, 0.055), transparent);
+      animation: tracking 10s linear infinite;
+    }
+
+    .osd-topline {
+      position: absolute;
+      z-index: 2;
+      top: 13.4%;
+      left: 12.2%;
+      right: 12.2%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: rgba(176, 242, 248, 0.58);
+      font-size: clamp(8px, 1.05vw, 13px);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      text-shadow: 0 0 5px rgba(98, 237, 255, 0.36);
+      pointer-events: none;
+    }
+
+    .menu {
+      position: absolute;
+      z-index: 2;
+      top: 29%;
+      left: 14%;
+      width: 78%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: clamp(3px, 0.9vh, 12px);
+      filter: blur(0.7px);
+      transition: filter 120ms linear, opacity 120ms linear;
+      opacity: 0.91;
+    }
+
+    .nav-link {
+      position: relative;
+      display: block;
+      max-width: 100%;
+      padding: 0 0 0 1.18em;
+      color: var(--phosphor);
+      font-size: clamp(12px, min(5.1vh, 3.6vw), 48px);
+      font-weight: 700;
+      line-height: 1.13;
+      letter-spacing: 0.015em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+      outline: none;
+      text-shadow:
+        1px 0 rgba(255, 48, 145, 0.18),
+        -1px 0 rgba(47, 226, 255, 0.24),
+        0 0 3px rgba(127, 247, 255, 0.65),
+        0 0 9px rgba(65, 209, 255, 0.20);
+      -webkit-tap-highlight-color: transparent;
+      transition: color 90ms linear, text-shadow 90ms linear;
+    }
+
+    .nav-link::before {
+      content: "▶";
+      position: absolute;
+      left: 0;
+      top: 0.02em;
+      color: var(--phosphor-hot);
+      opacity: 0;
+      font-size: 0.84em;
+      text-shadow: 0 0 5px rgba(255, 105, 197, 0.7);
+    }
+
+    .nav-link.is-selected,
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--phosphor-hot);
+      text-shadow:
+        1px 0 rgba(70, 232, 255, 0.30),
+        0 0 3px rgba(255, 157, 221, 0.9),
+        0 0 10px rgba(255, 73, 181, 0.35);
+    }
+
+    .nav-link.is-selected::before,
+    .nav-link:hover::before,
+    .nav-link:focus-visible::before { opacity: 1; }
+
+    .nav-link:focus-visible {
+      outline: 1px dotted rgba(190, 250, 255, 0.82);
+      outline-offset: 5px;
+    }
+
+    .tagline {
+      position: absolute;
+      z-index: 2;
+      top: 69%;
+      left: 16%;
+      max-width: 70%;
+      color: rgba(183, 250, 255, 0.60);
+      font-size: clamp(8px, min(1.55vh, 1.25vw), 15px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-shadow: 0 0 5px rgba(86, 218, 255, 0.25);
+      pointer-events: none;
+    }
+
+    .signal-controls {
+      position: absolute;
+      z-index: 2;
+      right: 12.2%;
+      bottom: 12.2%;
+      left: 12.2%;
+      display: grid;
+      grid-template-columns: auto minmax(70px, 31%) 1fr;
+      align-items: center;
+      gap: clamp(7px, 1.1vw, 16px);
+      color: rgba(180, 244, 249, 0.66);
+      font-size: clamp(8px, 1.05vw, 13px);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-shadow: 0 0 5px rgba(98, 237, 255, 0.24);
+    }
+
+    #bandwidth {
+      width: 100%;
+      height: 18px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: ew-resize;
+      accent-color: var(--phosphor-hot);
+      touch-action: pan-y;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    #bandwidth:focus-visible {
+      outline: 1px dotted var(--phosphor);
+      outline-offset: 5px;
+    }
+
+    #bandwidth::-webkit-slider-runnable-track {
+      height: 2px;
+      border: 0;
+      background: rgba(180, 244, 249, 0.45);
+      box-shadow: 0 0 4px rgba(101, 234, 255, 0.25);
+    }
+
+    #bandwidth::-moz-range-track {
+      height: 2px;
+      border: 0;
+      background: rgba(180, 244, 249, 0.45);
+      box-shadow: 0 0 4px rgba(101, 234, 255, 0.25);
+    }
+
+    #bandwidth::-webkit-slider-thumb {
+      width: 8px;
+      height: 8px;
+      margin-top: -3px;
+      border: 0;
+      border-radius: 0;
+      background: var(--phosphor-hot);
+      box-shadow: 0 0 7px rgba(255, 111, 200, 0.85);
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    #bandwidth::-moz-range-thumb {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      border-radius: 0;
+      background: var(--phosphor-hot);
+      box-shadow: 0 0 7px rgba(255, 111, 200, 0.85);
+    }
+
+    .signal-output {
+      justify-self: end;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    @keyframes tracking {
+      from { transform: translateY(0); }
+      to { transform: translateY(560%); }
+    }
+
+    @keyframes phosphor-flicker {
+      0%, 95%, 97%, 100% { opacity: 1; }
+      96% { opacity: 0.975; }
+      98% { opacity: 0.988; }
+    }
+
+    @media (max-width: 560px) {
+      .crt-shell {
+        width: min(98vw, 133.333svh);
+        padding: 5px;
+      }
+      .osd-topline {
+        left: 10%; right: 10%; top: 12%;
+        font-size: 7px;
+      }
+      .menu { left: 10%; top: 28%; width: 85%; gap: 5px; }
+      .nav-link { font-size: clamp(11px, 3.05vw, 17px); }
+      .tagline { left: 12%; top: 69%; font-size: 7px; }
+      .signal-controls {
+        left: 10%; right: 10%; bottom: 11%;
+        grid-template-columns: auto minmax(55px, 29%) 1fr;
+        gap: 7px;
+        font-size: 7px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="crt-shell" id="home">
+    <section class="crt-screen" aria-label="CRT-style personal homepage">
+      <canvas id="static-canvas" aria-hidden="true"></canvas>
+      <div class="osd-topline" aria-hidden="true">
+        <span>Personal site / 001</span>
+        <span>Channel 01</span>
+      </div>
+
+      <header class="sr-only">
+        <h1>Your Name</h1>
+        <p>Mathematics, software, and the spaces between.</p>
+      </header>
+
+      <nav class="menu" id="navigation" aria-label="Primary navigation">
+        <a class="nav-link is-selected" href="#home">Your Name</a>
+        <a class="nav-link" href="/math-posts">Math Posts</a>
+        <a class="nav-link" href="/software-projects">Software Projects</a>
+        <a class="nav-link" href="/curriculum-vitae.pdf">Curriculum Vitae</a>
+        <a class="nav-link" href="/resume.pdf">Resume</a>
+      </nav>
+
+      <p class="tagline">Mathematics, software, and the spaces between.</p>
+
+      <div class="signal-controls">
+        <label for="bandwidth">Signal</label>
+        <input id="bandwidth" type="range" min="0" max="100" step="1" value="18"
+          aria-describedby="bandwidth-help" />
+        <output class="signal-output" id="bandwidth-output" for="bandwidth" aria-live="polite">18% · HEAVY STATIC</output>
+      </div>
+      <span class="sr-only" id="bandwidth-help">Increase the signal to reduce static and sharpen the display.</span>
+
+      <div class="tracking-band" aria-hidden="true"></div>
+      <div class="scanlines" aria-hidden="true"></div>
+      <div class="screen-glass" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const screen = document.querySelector(".crt-screen");
+      const canvas = document.getElementById("static-canvas");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const slider = document.getElementById("bandwidth");
+      const output = document.getElementById("bandwidth-output");
+      const menu = document.getElementById("navigation");
+      const links = [...menu.querySelectorAll(".nav-link")];
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      let noiseImage;
+      let noiseWidth = 0;
+      let noiseHeight = 0;
+      let lastFrame = 0;
+      let resizeTimer;
+
+      function resizeNoise() {
+        const bounds = screen.getBoundingClientRect();
+        noiseWidth = Math.max(360, Math.min(900, Math.round(bounds.width * 0.82)));
+        noiseHeight = Math.round(noiseWidth * 3 / 4);
+        canvas.width = noiseWidth;
+        canvas.height = noiseHeight;
+        noiseImage = ctx.createImageData(noiseWidth, noiseHeight);
+        drawNoise(performance.now(), true);
+      }
+
+      function drawNoise(timestamp, force = false) {
+        if (!force && timestamp - lastFrame < (reducedMotion ? 500 : 72)) return;
+        lastFrame = timestamp;
+        const pixels = noiseImage.data;
+
+        for (let i = 0; i < pixels.length; i += 4) {
+          const r = Math.random();
+          let light;
+          if (r < 0.53) light = 5 + Math.random() * 28;
+          else if (r < 0.82) light = 24 + Math.random() * 57;
+          else if (r < 0.985) light = 62 + Math.random() * 96;
+          else light = 155 + Math.random() * 100;
+
+          let red = light * 0.92;
+          let green = light * 1.00;
+          let blue = light * 1.10;
+          const tint = Math.random();
+          if (tint > 0.996) { red *= 1.24; green *= 0.55; blue *= 1.35; }
+          else if (tint < 0.004) { red *= 1.45; green *= 0.58; blue *= 0.82; }
+
+          pixels[i] = Math.min(255, red);
+          pixels[i + 1] = Math.min(255, green);
+          pixels[i + 2] = Math.min(255, blue);
+          pixels[i + 3] = 255;
+        }
+
+        ctx.putImageData(noiseImage, 0, 0);
+        // Occasional brief horizontal interference streaks, kept subtle.
+        for (let streak = 0; streak < 4; streak++) {
+          if (Math.random() > 0.62) continue;
+          const y = Math.random() * noiseHeight;
+          const x = Math.random() * noiseWidth * 0.4;
+          const width = noiseWidth * (0.18 + Math.random() * 0.68);
+          ctx.fillStyle = `rgba(175, 238, 255, ${0.06 + Math.random() * 0.12})`;
+          ctx.fillRect(x, y, width, 1 + Math.random() * 2);
+        }
+      }
+
+      function animateNoise(timestamp) {
+        drawNoise(timestamp);
+        requestAnimationFrame(animateNoise);
+      }
+
+      function updateSignal() {
+        const value = Number(slider.value);
+        const staticOpacity = 0.25 + (1 - value / 100) * 0.64;
+        canvas.style.opacity = staticOpacity.toFixed(2);
+        menu.style.filter = `blur(${((100 - value) / 100 * 0.8).toFixed(2)}px)`;
+        menu.style.opacity = (0.76 + value / 100 * 0.24).toFixed(2);
+
+        let state = "HEAVY STATIC";
+        if (value >= 72) state = "SIGNAL LOCKED";
+        else if (value >= 38) state = "TUNING";
+        output.textContent = `${String(value).padStart(2, "0")}% · ${state}`;
+      }
+
+      function selectLink(link) {
+        links.forEach(item => item.classList.toggle("is-selected", item === link));
+      }
+
+      links.forEach(link => {
+        link.addEventListener("pointerenter", () => selectLink(link));
+        link.addEventListener("focus", () => selectLink(link));
+      });
+      menu.addEventListener("pointerleave", () => {
+        if (!menu.contains(document.activeElement)) selectLink(links[0]);
+      });
+      menu.addEventListener("focusout", () => {
+        requestAnimationFrame(() => {
+          if (!menu.contains(document.activeElement)) selectLink(links[0]);
+        });
+      });
+      slider.addEventListener("input", updateSignal, { passive: true });
+
+      const observer = new ResizeObserver(() => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resizeNoise, 100);
+      });
+      observer.observe(screen);
+
+      resizeNoise();
+      updateSignal();
+      if (!reducedMotion) requestAnimationFrame(animateNoise);
+    })();
+  </script>
+</body>
+</html>

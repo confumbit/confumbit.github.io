@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>Polynomial Image Lab</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Polynomial Image Lab home">
+        <span class="brand-mark" aria-hidden="true">p</span>
+        <span>Polynomial <span class="brand-light">Image Lab</span></span>
+      </a>
+      <span class="topbar-note"><span class="status-dot"></span> In-browser processing</span>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">RASTER RECONSTRUCTION / 01</p>
+      <h1>Rebuild a picture<br><span>from one polynomial.</span></h1>
+      <p class="intro-copy">Treat the picture like an old cable-TV raster signal: scan its pixels in one long line, then interpolate that signal with a single-variable polynomial. Everything runs locally in your browser.</p>
+    </section>
+
+    <section class="workspace" aria-label="Polynomial image reconstruction tool">
+      <div class="preview-grid">
+        <article class="preview-card">
+          <div class="preview-header">
+            <div>
+              <p class="panel-kicker">REFERENCE</p>
+              <h2>Sampled image</h2>
+            </div>
+            <span class="tag">INPUT</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="originalCanvas" aria-label="Image sampled onto the processing grid"></canvas>
+            <div class="canvas-placeholder" id="originalPlaceholder">Loading your image…</div>
+          </div>
+          <p class="preview-caption">The fixed image, resized to the raster processing grid.</p>
+        </article>
+
+        <article class="preview-card result-card">
+          <div class="preview-header">
+            <div>
+              <p class="panel-kicker">LIVE OUTPUT</p>
+              <h2>Polynomial reconstruction</h2>
+            </div>
+            <span class="tag tag-accent">OUTPUT</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="resultCanvas" aria-label="Image reconstructed from a single-variable polynomial"></canvas>
+            <div class="canvas-placeholder" id="resultPlaceholder">Waiting for image…</div>
+          </div>
+          <p class="preview-caption" id="renderCaption">Move the slider to increase the polynomial degree.</p>
+        </article>
+      </div>
+
+      <section class="controls-card" aria-label="Reconstruction controls">
+        <div class="controls-topline">
+          <div>
+            <p class="panel-kicker">RECONSTRUCTION CONTROL</p>
+            <h2>Polynomial terms</h2>
+          </div>
+          <div class="terms-count" aria-live="polite">
+            <strong id="termsValue">—</strong>
+            <span id="termsTotal">polynomial terms</span>
+          </div>
+        </div>
+
+        <div class="slider-row">
+          <span class="scale-label">Smooth</span>
+          <input id="termsSlider" type="range" min="0" max="1000" value="240" step="1" disabled aria-label="Polynomial degree">
+          <span class="scale-label">Detailed</span>
+        </div>
+        <div class="slider-meta">
+          <span id="termsPercent">Preparing polynomial…</span>
+          <span id="gridInfo">Raster: —</span>
+        </div>
+
+        <div class="control-divider"></div>
+        <div class="footer-controls">
+          <div class="method-note">
+            <span class="method-icon" aria-hidden="true">p(x)</span>
+            <p><strong>Single-variable polynomial</strong><br><span>One polynomial per color channel follows the image's row-by-row raster scan.</span></p>
+          </div>
+          <button id="resetButton" type="button" disabled>Reset detail <span aria-hidden="true">↺</span></button>
+        </div>
+        <p id="statusMessage" class="status-message" role="status">Looking for <code>your-image.jpg</code> in the project root…</p>
+      </section>
+    </section>
+
+    <footer class="page-footer">
+      <span>Polynomial Image Lab</span>
+      <span>Raster scan → polynomial interpolation → image</span>
+    </footer>
+  </main>
+</body>
+</html>
