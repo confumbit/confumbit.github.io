@@ -1,0 +1,35 @@
+---
+layout: archive-default
+title: Software Projects
+---
+
+<!-- content -->
+<div class="content" style="align-items: flex-start">
+  <h1>Projects</h1>
+  <div class="project-list">
+    {% for project in site.data.archive.projects %}
+    <div
+      class="project-item {% if project.image_path == null %}only-text{% endif %}"
+    >
+      {% if project.image_path %}
+      <div class="project-item-image">
+        <img
+          src="{{ project.image_path }}"
+          alt="{{ project.name | append: ' preview image' }}"
+        />
+      </div>
+      {% endif %}
+      <div class="project-item-details">
+        <h3>{{ project.name }}</h3>
+        <a href="{{ project.url }}">{{ project.display_url }}</a>
+        <ul>
+          {% for line in project.description %}
+          <li>{{ line | strip }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <hr />
+    {% endfor %}
+  </div>
+</div>

@@ -1,30 +1,260 @@
----
-layout: default
-title: Home
----
-
-<!-- old site banner -->
-<div class="old-site-banner">
-  <a href="/old/index.html" class="old-site-link">old website</a>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hiten Dalmia | Mathematics &amp; Computer Science</title>
+<meta name="description" content="Hiten Dalmia's personal homepage: mathematics, economics and theoretical computer science, with an interactive Fourier transform experiment.">
+<meta name="author" content="Hiten Dalmia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hiten Dalmia">
+<meta property="og:title" content="Hiten Dalmia | Mathematics &amp; Computer Science">
+<meta property="og:description" content="Hiten Dalmia's personal homepage: mathematics, economics and theoretical computer science, with an interactive Fourier transform experiment.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hiten Dalmia | Mathematics &amp; Computer Science">
+<meta name="twitter:description" content="Hiten Dalmia's personal homepage: mathematics, economics and theoretical computer science, with an interactive Fourier transform experiment.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "name": "Hiten Dalmia",
+  "description": "Hiten Dalmia's personal homepage: mathematics, economics and theoretical computer science, with an interactive Fourier transform experiment.",
+  "inLanguage": "en",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Hiten Dalmia",
+    "description": "Undergraduate education in mathematics and economics at Kirori Mal College, University of Delhi; previously a theoretical computer science master's student at Chennai Mathematical Institute.",
+    "email": "mailto:hitendwork@gmail.com",
+    "knowsAbout": [
+      "Mathematics",
+      "Economics",
+      "Theoretical computer science",
+      "Fourier transforms"
+    ]
+  }
+}
+</script>
+<style>
+*{box-sizing:border-box}html{overflow-y:scroll}body{margin:0;background:#101010;color:#eeeeee;font-family:serif}main{position:relative;width:100%;min-height:100vh}canvas{display:block;width:100%;pointer-events:none} .accessible{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}input{position:absolute;margin:0;appearance:none;-webkit-appearance:none;background:transparent;cursor:pointer;height:36px;z-index:1}nav a,.contact-links a{position:absolute;color:transparent;text-decoration:none;height:44px;display:flex;align-items:center;justify-content:center}noscript{display:block;padding:30px}
+input::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:transparent}
+input::-moz-range-track{height:5px;border-radius:3px;background:transparent}
+input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:2px solid #101010;border-radius:50%;background:#ffffff;margin-top:-6.5px}
+input::-moz-range-thumb{width:14px;height:14px;border:2px solid #101010;border-radius:50%;background:#ffffff}
+input:focus-visible{outline:2px solid #eeeeee;outline-offset:6px;border-radius:4px}
+output{position:absolute;z-index:1;font:600 13px serif;color:#eeeeee;line-height:36px;white-space:nowrap;pointer-events:none}
+#slider-wave{position:absolute;height:36px;pointer-events:none;overflow:visible}#slider-wave path{fill:none;stroke:#bcbcbc;stroke-width:1.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+#intro-links a{position:absolute;display:block;z-index:1;color:transparent;text-decoration:none}#intro-links a:hover{background:rgba(255,255,255,.08)}#intro-links a:focus-visible{outline:1px solid #eeeeee;outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<p class="accessible" id="intro">It turns out that if you take an image, convert its information into waves of varying frequencies, and then reconstruct the image from these waves, you can make it look like it's being displayed on an old-timey analog TV! Of course, these are not vague, disjoint phenomena. I use the <a href="https://en.wikipedia.org/wiki/Fourier_transform" tabindex="-1"><i>Fourier transform</i></a> (specifically, the FFT) to convert the color and brightness information of the pixels into frequency-domain representations, an idea I had during a reading project on <a href="https://en.wikipedia.org/wiki/Integral_transform" tabindex="-1">integral transforms</a>, particularly the Fourier transform. As you move the slider to the right, you increase the bandwidth allowed through, letting more detail return and making the image sharper.</p>
+<div id="intro-links"></div>
+<label class="accessible" for="bandwidth">Image bandwidth</label>
+<svg id="slider-wave" viewBox="0 0 360 36" preserveAspectRatio="none" aria-hidden="true"><path id="wave-path"/></svg>
+<input id="bandwidth" type="range" min="0" max="1000" value="408" step="1">
+<output id="bandwidth-value" for="bandwidth"></output>
+<h1 class="accessible">Hiten Dalmia</h1>
+<p class="accessible" id="bio">I have an undergraduate education in <i>Mathematics</i> and <i>Economics</i> from <a href="https://en.wikipedia.org/wiki/Kirori_Mal_College" tabindex="-1">Kirori Mal College</a>, University of Delhi. Until recently, I was at the <a href="https://en.wikipedia.org/wiki/Chennai_Mathematical_Institute" tabindex="-1">Chennai Mathematical Institute</a> as a master's student in <i>Theoretical Computer Science.</i></p>
+<nav aria-label="Main navigation"><a href="/projects.html">Software Projects</a><a href="/posts.html">Math Posts</a><a href="https://github.com/confumbit/resume-source-files/blob/main/main.pdf">Resume</a><a href="https://github.com/confumbit/academia-cv/blob/main/main.pdf">Curriculum Vitae</a></nav>
+<div class="contact-links" aria-label="Email and social links">
+<a href="mailto:hitendwork@gmail.com">hitendwork@gmail.com</a>
+<a href="https://www.linkedin.com/in/hitendalmia" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/hitendalmia" target="_blank" rel="noopener noreferrer">GitHub</a>
 </div>
+<canvas id="picture" aria-hidden="true"></canvas>
+<noscript>Enable JavaScript to view the Fourier reconstruction.</noscript>
+</main>
+<script>
+'use strict';
+// Edit the name and navigation URLs here. Destinations are placeholders.
+const PROFILE={name:'Hiten Dalmia',urls:["/projects.html", "/posts.html", "https://github.com/confumbit/resume-source-files/blob/main/main.pdf", "https://github.com/confumbit/academia-cv/blob/main/main.pdf"]};
+// Simplified component-video bandwidth model: FFT filtering of YIQ scanlines.
+// No RF, composite modulation, interlacing, or phosphor simulation.
+const canvas=document.querySelector('#picture'),ctx=canvas.getContext('2d');
+const slider=document.querySelector('#bandwidth'),links=[...document.querySelectorAll('nav a')];
+const contactLinks=[...document.querySelectorAll('.contact-links a')];
+const emailLinks=contactLinks.filter(a=>a.getAttribute('href')?.startsWith('mailto:'));
+const socialLinks=contactLinks.filter(a=>!emailLinks.includes(a));
+let W,H,N,OFFSET,FS,pending=false;
+// Smooth power curve: 70% of slider travel corresponds to 2 MHz.
+function bandwidthMHz(){if(+slider.value===+slider.max)return Infinity;return 5*Math.pow(+slider.value/1000,Math.log(.4)/Math.log(.7));}
+// Keep signal processing off the UI thread. This inline worker keeps the file standalone.
+function signalWorker(){
+ let W,H,N,OFFSET,FS,source,spectra,out;
+ function fft(re,im,inverse=false){
+ for(let i=1,j=0;i<N;i++){let bit=N>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;if(i<j){[re[i],re[j]]=[re[j],re[i]];[im[i],im[j]]=[im[j],im[i]];}}
+ for(let len=2;len<=N;len*=2){const angle=(inverse?2:-2)*Math.PI/len,wr=Math.cos(angle),wi=Math.sin(angle);
+ for(let start=0;start<N;start+=len){let ar=1,ai=0;for(let j=0;j<len/2;j++){const a=start+j,b=a+len/2,tr=re[b]*ar-im[b]*ai,ti=re[b]*ai+im[b]*ar;re[b]=re[a]-tr;im[b]=im[a]-ti;re[a]+=tr;im[a]+=ti;const next=ar*wr-ai*wi;ai=ar*wi+ai*wr;ar=next;}}}
+ if(inverse)for(let i=0;i<N;i++){re[i]/=N;im[i]/=N;}
+}
 
-<!-- content -->
-<div class="content">
-  <h1>Hello.</h1>
-  <span style="font-size: 1.5em">I'm Hiten Dalmia.</span>
-  <p style="padding: 0 32px 0 32px; text-align: center">
-    I am currently an undergraduate student at Kirori Mal College, University of
-    Delhi majoring in <i>Mathematics</i> and minoring in <i>Economics</i>. I
-    also work as a <i>Freelance Software Developer</i>.
-  </p>
-  <span style="font-size: 0.8em">
-    <a href="mailto:hitendalmia04@gmail.com">hitendalmia04@gmail.com</a>/<a
-      href="mailto:2232174@kmc.du.ac.in"
-      >2232174@kmc.du.ac.in</a
-    >
-  </span>
-  <div style="display: flex; gap: 32px; margin-top: 32px">
-    <a href="https://www.linkedin.com/in/hiten-dalmia/">LinkedIn</a>
-    <a href="https://github.com/confumbit">GitHub</a>
-  </div>
-</div>
+ function prepare(data){
+  ({W,H,N,OFFSET,FS}=data);source=new Uint8ClampedArray(data.pixels);
+  out=new Uint8ClampedArray(source.length);spectra=[];
+  for(let y=0;y<H;y++){
+   const start=y*W*4;let uniform=true;
+   for(let x=1;x<W;x++){const p=start+x*4;if(source[p]!==source[start]||source[p+1]!==source[start+1]||source[p+2]!==source[start+2]){uniform=false;break;}}
+   if(uniform)continue; // Constant rows contain only DC and need no filtering.
+   const channels=Array.from({length:3},()=>[new Float64Array(N),new Float64Array(N)]);
+   for(let x=0;x<N;x++){const p=start+Math.max(0,Math.min(W-1,x-OFFSET))*4,r=source[p],g=source[p+1],b=source[p+2];channels[0][0][x]=.299*r+.587*g+.114*b;channels[1][0][x]=.596*r-.274*g-.322*b;channels[2][0][x]=.211*r-.523*g+.312*b;}
+   channels.forEach(c=>fft(c[0],c[1]));spectra.push({y,channels});
+  }
+ }
+ function reconstruct(bw){
+  // At the endpoint preserve every source pixel, including full color detail.
+  if(bw===Infinity)return source.slice().buffer;
+  out.set(source);
+  const gains=[bw,Math.min(bw,1.3),Math.min(bw,.5)].map(cutoff=>Float64Array.from({length:N},(_,k)=>k===0?1:cutoff===0?0:1/Math.sqrt(1+(Math.min(k,N-k)*FS/N/cutoff)**8)));
+  const rows=Array.from({length:3},()=>new Float64Array(N)),imag=new Float64Array(N);
+  for(const {y,channels} of spectra){
+   for(let c=0;c<3;c++){const [re,im]=channels[c],row=rows[c];for(let k=0;k<N;k++){row[k]=re[k]*gains[c][k];imag[k]=im[k]*gains[c][k];}fft(row,imag,true);}
+   for(let x=0;x<W;x++){const k=x+OFFSET,p=(y*W+x)*4,Y=rows[0][k],I=rows[1][k],Q=rows[2][k];out[p]=Y+.956*I+.621*Q;out[p+1]=Y-.272*I-.647*Q;out[p+2]=Y-1.106*I+1.703*Q;}
+  }
+  return out.slice().buffer;
+ }
+ onmessage=({data})=>{if(data.type==='prepare')prepare(data);const pixels=reconstruct(data.bw);postMessage({pixels,W,H,version:data.version,bw:data.bw},[pixels]);};
+}
+const workerURL=URL.createObjectURL(new Blob(['('+signalWorker.toString()+')()'],{type:'text/javascript'}));
+const worker=new Worker(workerURL);URL.revokeObjectURL(workerURL);
+let busy=false,version=0,prepared=null,lastBandwidth=null;
+function pump(){
+ if(busy)return;
+ const bw=bandwidthMHz();
+ if(prepared){const data=prepared;prepared=null;busy=true;worker.postMessage({...data,bw},[data.pixels]);}
+ else if(lastBandwidth!==bw){busy=true;worker.postMessage({type:'filter',bw,version});}
+}
+worker.onmessage=({data})=>{
+ busy=false;
+ if(data.version===version){ctx.putImageData(new ImageData(new Uint8ClampedArray(data.pixels),data.W,data.H),0,0);lastBandwidth=data.bw;}
+ pump();
+};
+
+function draw(){
+ pending=false;
+ // Work in CSS pixels so text and controls remain aligned on every viewport.
+ W=Math.round(document.documentElement.clientWidth);N=2**Math.ceil(Math.log2(W+256));OFFSET=Math.floor((N-W)/2);FS=W/52;
+ const sidePadding=Math.max(20,Math.min(80,W*.08)),textWidth=W-2*sidePadding,size=16,lineHeight=size*1.5;
+ const introWidth=Math.min(1200,textWidth);
+ ctx.font=size+'px serif';
+ const lines=[];
+ let introRuns=[],introLineWidth=0;
+ function finishIntroLine(){
+  while(introRuns.length&&/^\s+$/.test(introRuns[introRuns.length-1].text))introLineWidth-=introRuns.pop().width;
+  if(introRuns.length)lines.push({runs:introRuns,width:introLineWidth});
+  introRuns=[];introLineWidth=0;
+ }
+ for(const node of document.querySelector('#intro').childNodes){
+  const font=(node.nodeName==='I'||node.querySelector?.('i')?'italic ':'')+size+'px serif';ctx.font=font;
+  for(const text of node.textContent.match(/\s+|\S+/g)||[]){
+   const width=ctx.measureText(text).width;
+   if(introLineWidth+width>introWidth&&introRuns.length)finishIntroLine();
+   if(!introRuns.length&&/^\s+$/.test(text))continue;
+   introRuns.push({text,width,font,link:node.nodeName==='A'?node:null});introLineWidth+=width;
+  }
+ }
+ finishIntroLine();
+ const top=W<540?24:32,stackReadout=textWidth<372;
+ const nameSize=Math.min(36,textWidth/6.8),introHeight=lines.length*lineHeight;
+ ctx.font='16px serif';
+ const navCellWidth=Math.max(150,...links.map(a=>ctx.measureText(a.textContent).width+32));
+ const navColumns=Math.max(1,Math.min(links.length,Math.floor(textWidth/navCellWidth)));
+ const controlHeight=stackReadout?72:36,menuHeight=Math.ceil(links.length/navColumns)*48;
+ const sliderY=top+introHeight+24+16;
+ const controlsBottom=sliderY-16+controlHeight;
+ const bioSize=16,bioLineHeight=bioSize*1.5,bioWidth=Math.min(920,textWidth);
+ const bioLines=[];let bioLine=[],bioLineWidth=0;
+ function finishBioLine(){
+  while(bioLine.length&&/^\s+$/.test(bioLine[bioLine.length-1].text))bioLineWidth-=bioLine.pop().width;
+  if(bioLine.length)bioLines.push({runs:bioLine,width:bioLineWidth});
+  bioLine=[];bioLineWidth=0;
+ }
+ for(const node of document.querySelector('#bio').childNodes){
+  const font=(node.nodeName==='I'?'italic ':'')+bioSize+'px serif';ctx.font=font;
+  for(const text of node.textContent.match(/\s+|\S+/g)||[]){
+   const width=ctx.measureText(text).width;
+   if(bioLineWidth+width>bioWidth&&bioLine.length)finishBioLine();
+   if(!bioLine.length&&/^\s+$/.test(text))continue;
+   bioLine.push({text,width,font,link:node.nodeName==='A'?node:null});bioLineWidth+=width;
+  }
+ }
+ finishBioLine();
+ // Center the profile as a group; on short screens keep a clear gap and scroll.
+ const bioHeight=bioLines.length*bioLineHeight;
+ const contactHeight=emailLinks.length*32+(socialLinks.length?16+32:0);
+ const profileHeight=nameSize+24+bioHeight+24+contactHeight+32+menuHeight;
+ const nameY=Math.max(controlsBottom+(W<540?48:72),innerHeight*.52-profileHeight/2);
+ const bioY=nameY+nameSize+24,contactY=bioY+bioHeight+24;
+ const navY=contactY+contactHeight+32;
+ H=Math.ceil(Math.max(innerHeight,navY+menuHeight+32));canvas.width=W;canvas.height=H;
+ ctx.fillStyle='#101010';ctx.fillRect(0,0,W,H);ctx.textBaseline='top';ctx.font=size+'px serif';ctx.fillStyle='#cccccc';
+ ctx.textAlign='left';
+ const introOverlays=document.querySelector('#intro-links');introOverlays.replaceChildren();
+ lines.forEach((line,i)=>{
+  let x=(W-line.width)/2,group=null;
+  function finishLink(){if(!group)return;const a=document.createElement('a');a.href=group.link.href;a.setAttribute('aria-label',group.link.textContent);a.style.left=group.x+'px';a.style.top=(top+i*lineHeight)+'px';a.style.width=group.width+'px';a.style.height=lineHeight+'px';introOverlays.appendChild(a);group=null;}
+  for(const run of line.runs){
+   ctx.font=run.font;ctx.fillText(run.text,x,top+i*lineHeight);
+   if(group&&group.link!==run.link)finishLink();
+   if(run.link){if(!group)group={link:run.link,x,width:0};group.width+=run.width;ctx.fillRect(x,top+i*lineHeight+size+2,run.width,.7);}
+   x+=run.width;
+  }finishLink();
+ });
+ const trackWidth=Math.min(240,textWidth),trackX=(W-trackWidth-(stackReadout?0:132))/2;
+ slider.style.left=trackX+'px';slider.style.top=(sliderY-16)+'px';slider.style.width=trackWidth+'px';
+ const wave=document.querySelector('#slider-wave');wave.style.left=trackX+'px';wave.style.top=(sliderY-16)+'px';wave.style.width=trackWidth+'px';
+ const readout=document.querySelector('#bandwidth-value');readout.style.left=(stackReadout?trackX:trackX+trackWidth+18)+'px';readout.style.top=(stackReadout?sliderY+20:sliderY-16)+'px';readout.style.width=(stackReadout?trackWidth:114)+'px';readout.style.textAlign=stackReadout?'center':'left';
+ ctx.textAlign='center';ctx.font=nameSize+'px serif';ctx.fillStyle='#eeeeee';ctx.fillText(PROFILE.name,W/2,nameY);
+ ctx.textAlign='left';ctx.fillStyle='#bbbbbb';
+ bioLines.forEach((line,i)=>{
+  let x=(W-line.width)/2,group=null;
+  function finishLink(){if(!group)return;const a=document.createElement('a');a.href=group.link.href;a.setAttribute('aria-label',group.link.textContent);a.style.left=group.x+'px';a.style.top=(bioY+i*bioLineHeight)+'px';a.style.width=group.width+'px';a.style.height=bioLineHeight+'px';introOverlays.appendChild(a);group=null;}
+  for(const run of line.runs){
+   ctx.font=run.font;ctx.fillText(run.text,x,bioY+i*bioLineHeight);
+   if(group&&group.link!==run.link)finishLink();
+   if(run.link){if(!group)group={link:run.link,x,width:0};group.width+=run.width;ctx.fillRect(x,bioY+i*bioLineHeight+bioSize+2,run.width,.7);}
+   x+=run.width;
+  }finishLink();
+ });
+ ctx.textAlign='center';ctx.font='16px serif';
+ contactLinks.forEach((a,i)=>{
+  const emailIndex=emailLinks.indexOf(a),socialIndex=socialLinks.indexOf(a);
+  const x=emailIndex>=0?W/2:W/2+(socialIndex-(socialLinks.length-1)/2)*104;
+  const y=contactY+(emailIndex>=0?emailIndex*32:emailLinks.length*32+16);
+  const width=Math.min(textWidth,ctx.measureText(a.textContent).width+20);
+  a.style.left=(x-width/2)+'px';a.style.top=y+'px';a.style.width=width+'px';a.style.height='32px';
+  ctx.fillStyle='#cccccc';ctx.fillText(a.textContent,x,y+6);
+  if(a.hasAttribute('href')){ctx.fillRect(x-(width-20)/2,y+23,width-20,1);}
+  if(document.activeElement===a){ctx.strokeStyle='#eeeeee';ctx.strokeRect(x-width/2,y,width,32);}
+ });
+ ctx.textAlign='center';ctx.font='16px serif';const spacing=Math.min(Math.max(170,navCellWidth),textWidth/navColumns);
+ links.forEach((a,i)=>{const row=Math.floor(i/navColumns),rowCount=Math.min(navColumns,links.length-row*navColumns),x=W/2+(i%navColumns-(rowCount-1)/2)*spacing,y=navY+row*48;a.style.left=(x-spacing/2)+'px';a.style.top=y+'px';a.style.width=spacing+'px';ctx.fillStyle='#dddddd';ctx.fillText(a.textContent,x,y+12);if(document.activeElement===a){ctx.strokeStyle='#eeeeee';ctx.strokeRect(x-spacing/2,y,spacing,44);}});
+ ctx.textAlign='left';
+ const source=ctx.getImageData(0,0,W,H);
+ prepared={type:'prepare',pixels:source.data.buffer,W,H,N,OFFSET,FS,version:++version};
+ pump();
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+function updateSlider(){
+ const bw=bandwidthMHz();
+ document.querySelector('#bandwidth-value').textContent=bw===Infinity?'Full bandwidth':bw.toFixed(2)+' MHz';
+ slider.setAttribute('aria-valuetext',bw===Infinity?'Full bandwidth, unfiltered':bw.toFixed(2)+' megahertz');
+ // Illustrative waveform; updated only on input, with no animation loop.
+ const fraction=Math.min(1,bw/5),cycles=1+27*Math.pow(fraction,.55),amplitude=2+7*Math.sqrt(fraction);
+ const points=[];
+ for(let i=0;i<=360;i++){
+  const t=i/360,x=360*t,y=18-amplitude*Math.sin(2*Math.PI*cycles*t);
+  points.push((i?'L':'M')+x.toFixed(1)+' '+y.toFixed(2));
+ }
+ document.querySelector('#wave-path').setAttribute('d',points.join(' '));
+}
+slider.addEventListener('input',()=>{updateSlider();pump();});
+updateSlider();
+[...links,...contactLinks].forEach(el=>{el.addEventListener('focus',schedule);el.addEventListener('blur',schedule);});
+links.forEach((a,i)=>a.href=PROFILE.urls[i]);
+document.querySelector('h1').textContent=PROFILE.name;
+let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(schedule,150);});
+draw();
+</script>
+</body>
+</html>
