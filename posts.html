@@ -7,10 +7,12 @@ hide_sidebar: true
 ---
 <main class="math-content" id="main">
   <header class="math-intro">
-    <nav aria-label="Main navigation">
-      <a href="/">Home</a><a href="/projects.html">Projects</a><a href="/posts.html" aria-current="page">Math posts</a>
-    </nav>
-    <h1><span class="math-sr-only">Math Posts</span>{% include math-title.svg %}</h1>
+    <div class="math-title-row">
+      <h1><span class="math-sr-only">Math Posts</span>{% include math-title.svg %}</h1>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a><a href="/projects.html">Projects</a><a href="/posts.html" aria-current="page">Math posts</a>
+      </nav>
+    </div>
     <div class="math-caption">
       <p>This title is traced using <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank" rel="noopener noreferrer">Bézier curves</a>, built by repeatedly interpolating between control points. The moving construction follows de Casteljau’s algorithm. I realise this looks quite similar to 3b1b's animations, I have not looked at his Manim library but I imagine it uses a similar technique for animations.</p>
       <button class="math-replay" type="button" hidden>Replay <span aria-hidden="true">↺</span></button>

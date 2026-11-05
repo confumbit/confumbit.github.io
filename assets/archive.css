@@ -1,0 +1,5 @@
+/* Preserve browser-default typography on the archived website. */
+body,
+button, input, select, textarea, code, pre, kbd, samp {
+  font-family: revert;
+}

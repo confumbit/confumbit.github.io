@@ -13,6 +13,7 @@
   construction.prepend(trace);
   const replay = document.querySelector('.math-replay');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const durationScale = 1.5;
   let frame;
   let animations = [];
   const lerp = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
@@ -37,12 +38,12 @@
       letter.style.strokeDashoffset = '1';
       letter.style.fillOpacity = '0';
       animations.push(letter.animate([{strokeDashoffset: 1}, {strokeDashoffset: 0}],
-        {duration: 1900, delay: i * 65, fill: 'forwards'}));
+        {duration: 1900 * durationScale, delay: i * 65 * durationScale, fill: 'forwards'}));
       animations.push(letter.animate([{fillOpacity: 0}, {fillOpacity: 1}],
-        {duration: 650, delay: 2200, fill: 'forwards'}));
+        {duration: 650 * durationScale, delay: 2200 * durationScale, fill: 'forwards'}));
     });
     function draw(now) {
-      const elapsed = now - start;
+      const elapsed = (now - start) / durationScale;
       const t = Math.max(0, Math.min(1, elapsed / 2300));
       const first = between(controls, t);
       const second = between(first, t);

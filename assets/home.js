@@ -76,7 +76,8 @@ function paintText(lines, top, lineHeight, size, overlays) {
   function finishLink(){
    if(!group)return;
    const a=document.createElement('a');
-   a.href=group.link.href;a.target='_blank';a.rel='noopener noreferrer';
+   a.href=group.link.href;
+   if(new URL(a.href).origin!==location.origin){a.target='_blank';a.rel='noopener noreferrer';}
    a.setAttribute('aria-label',group.link.textContent);
    Object.assign(a.style,{left:group.x+'px',top:y+'px',width:group.width+'px',height:lineHeight+'px'});
    overlays.appendChild(a);group=null;

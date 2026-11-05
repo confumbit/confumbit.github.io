@@ -4,11 +4,14 @@
 .posts-page a { color:inherit; text-underline-offset:5px; text-decoration-color:#cfcec2; }
 .posts-page a:hover { color:#a13c25; }
 .posts-page :focus-visible { outline:2px solid #a13c25; outline-offset:6px; }
-.math-intro nav { display:flex; justify-content:flex-end; gap:28px; font-size:13px; }
-.math-intro nav a { padding:8px 0; text-decoration:none; }
-.math-intro nav [aria-current] { text-decoration:underline; text-decoration-color:#a13c25; }
-.math-intro h1 { margin:26px 0 12px; line-height:1; }
-.math-title { display:block; width:min(100%,820px); height:auto; overflow:visible; }
+.math-content:not(.post-content) { width:min(1240px,calc(100% - 96px)); padding-top:0; }
+.math-intro { padding:64px 0 52px; }
+.math-title-row { display:flex; justify-content:space-between; align-items:center; gap:32px; }
+.math-intro nav { display:flex; flex-shrink:0; gap:28px; font-size:13px; }
+.math-intro nav a { padding:10px 0; text-decoration:none; }
+.math-intro nav [aria-current] { text-decoration:underline; text-decoration-color:#a13c25; text-decoration-thickness:2px; }
+.math-intro h1 { width:701px; min-width:0; margin:0; line-height:1; }
+.math-title { display:block; width:100%; height:auto; overflow:visible; }
 .math-letter { fill:#252722; stroke:#252722; stroke-width:.65; }
 .math-construction { opacity:0; pointer-events:none; }
 .math-construction polyline { fill:none; stroke-width:1; stroke:#a13c25; vector-effect:non-scaling-stroke; }
@@ -20,7 +23,7 @@
 .math-letter-handles polyline { stroke-width:.6; }
 .math-letter-handles circle { r:1.5px; stroke-width:.8; }
 .math-construction .math-pen { fill:#a13c25; }
-.math-caption { display:flex; align-items:flex-start; justify-content:space-between; gap:32px; padding:0 0 44px; }
+.math-caption { display:flex; align-items:flex-start; justify-content:space-between; gap:32px; margin-top:22px; }
 .math-caption p { max-width:580px; margin:0; font-size:14px; color:#62645b; }
 .math-replay { flex-shrink:0; color:#62645b; font:inherit; font-size:13px; border:1px solid #cfcec2; background:transparent; padding:8px 14px; cursor:pointer; }
 .math-replay:hover { border-color:#a13c25; color:#a13c25; }
@@ -67,9 +70,7 @@
 .post-footer { display:flex; justify-content:space-between; gap:24px; margin-top:48px; padding-top:24px; border-top:1px solid #cfcec2; font-size:13px; }
 @media (max-width:650px) {
  .math-content { width:calc(100% - 40px); padding-top:24px; }
- .math-intro nav { justify-content:flex-start; gap:24px; font-size:12px; }
- .math-intro h1 { margin-top:32px; }
- .math-caption { flex-direction:column; gap:16px; padding-bottom:32px; }
+ .math-caption { flex-direction:column; gap:16px; }
  .math-caption p { font-size:13px; }
  .math-section { grid-template-columns:1fr; gap:20px; padding:24px 0; }
  .math-list a { font-size:18px; }
@@ -79,4 +80,12 @@
  .post-body { font-size:16px; }
  .math-construction circle { r:3.5px; }
  .math-letter-handles circle { r:1.8px; }
+}
+@media (max-width:700px) {
+ .math-content:not(.post-content) { width:calc(100% - 40px); }
+ .math-intro { padding:44px 0 36px; }
+ .math-title-row { gap:16px; }
+ .math-intro nav { flex-direction:column; gap:0; font-size:11px; }
+ .math-intro nav a { padding:3px 0; }
+ .math-intro h1 { max-width:382px; }
 }

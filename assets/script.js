@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Open page destinations in new tabs; preserve in-page navigation and email.
+  // Keep site navigation in this tab; open external web destinations in new tabs.
   document.querySelectorAll("a[href]").forEach((link) => {
     const href = link.getAttribute("href");
-    if (!href || href.startsWith("#")) return;
+    if (!href) return;
     const destination = new URL(href, document.baseURI);
     if (!["http:", "https:"].includes(destination.protocol)) return;
-    const samePage = destination.origin === location.origin
-      && destination.pathname === location.pathname
-      && destination.search === location.search;
-    if (samePage && destination.hash) return;
+    if (destination.origin === location.origin) {
+      link.removeAttribute("target");
+      return;
+    }
     link.setAttribute("target", "_blank");
     const rel = new Set((link.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
     rel.add("noopener");
