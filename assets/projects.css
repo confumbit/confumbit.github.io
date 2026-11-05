@@ -1,0 +1,112 @@
+/* Flat paper, ink, and one vermilion accent. System fonts only. */
+.projects-page {
+  --paper: #f4f1e9;
+  --ink: #252722;
+  --muted: #62645b;
+  --rule: #cfcec2;
+  --accent: #a13c25;
+  display: block;
+  height: auto;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.65 Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+}
+.projects-page *, .projects-page *::before, .projects-page *::after { box-sizing: border-box; }
+.projects-page a { color: inherit; text-underline-offset: 5px; }
+.projects-page a:hover { color: var(--accent); }
+.projects-page :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+.projects-content, .projects-footer { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+.projects-title-row { display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+.projects-title-row nav { display: flex; gap: 28px; font-size: 13px; }
+.projects-title-row nav a { padding: 10px 0; text-decoration: none; }
+.projects-title-row nav [aria-current] { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.projects-content { min-width: 0; padding: 0; }
+.projects-intro { padding: 64px 0 52px; }
+.project-index { font: 12px/1.5 Georgia, "Times New Roman", serif; text-transform: uppercase; letter-spacing: 1.5px; }
+.projects-intro h1 { margin: 0; font: 400 clamp(72px, 10vw, 132px)/.98 Georgia, "Times New Roman", serif; letter-spacing: -6px; }
+.projects-period { color: var(--accent); }
+.projects-deck { margin: 22px 0 0; color: var(--muted); font-size: 18px; }
+.project-map { display: grid; grid-template-columns: minmax(0, 1fr) 300px; column-gap: 40px; width: 100%; max-width: none; margin: 0 0 76px; padding: 24px 0 0; border: 0; border-top: 2px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); }
+.project-map figcaption { grid-column: 1 / -1; }
+.project-map h2 { margin: 0; font: 400 30px/1.2 Georgia, serif; letter-spacing: -.7px; }
+.project-map-hint { grid-column: 1 / -1; margin: 16px 0 20px; color: var(--muted); font: 11px/1.6 Georgia, "Times New Roman", serif; }
+.project-map-hint span { display: none; }
+.project-map-scroll { min-width: 0; align-self: start; overflow-x: auto; margin: 0; padding-bottom: 8px; }
+.project-map-chart { display: block; width: 100%; min-width: 560px; }
+.project-map-grid line { stroke: var(--rule); stroke-dasharray: 2 6; }
+.project-map-grid text { fill: var(--muted); font: 13px Georgia, "Times New Roman", serif; }
+.project-map-axes path { stroke: var(--ink); stroke-width: 1.2; }
+.project-map-axes text { fill: var(--ink); font: 15px Georgia, "Times New Roman", serif; }
+.project-map-hit { fill: transparent; }
+.project-map-dot { fill: var(--paper); stroke: var(--accent); stroke-width: 1.6; }
+.project-map-point text { fill: var(--accent); font: 600 12px Georgia, "Times New Roman", serif; pointer-events: none; }
+.project-map-point:hover .project-map-dot, .project-map-point:focus-visible .project-map-dot, .project-map-point.is-highlighted .project-map-dot { fill: var(--accent); stroke: var(--accent); stroke-width: 3; }
+.project-map-point:hover text, .project-map-point:focus-visible text, .project-map-point.is-highlighted text { fill: var(--paper); }
+.project-map-key { display: block; list-style: none; margin: 0; padding: 0 0 0 20px; border: 0; border-left: 1px solid var(--rule); }
+.project-map-key a { display: flex; gap: 10px; align-items: baseline; min-height: 32px; padding: 4px 6px; border-radius: 0; font-size: 12px; line-height: 1.5; text-decoration: none; }
+.project-map-key a:hover, .project-map-key a:focus-visible, .project-map-key a.is-highlighted { background: #e8e1d5; color: var(--accent); }
+.project-map-number { display: inline-block; flex: 0 0 20px; height: auto; border: 0; border-radius: 0; color: var(--accent); font: 11px Georgia, "Times New Roman", serif; }
+.project-map-key small { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.project-map :focus-visible { outline-color: var(--accent); }
+.projects-page .project-item { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; width: 100%; height: auto; max-height: none; gap: 64px; margin: 0; padding: 44px 0 48px; border-bottom: 1px solid var(--rule); }
+.projects-page .project-item-details { min-width: 0; height: auto; padding: 0; overflow: visible; overflow-wrap: anywhere; }
+.project-index { display: block; margin-bottom: 14px; color: var(--accent); }
+.projects-page .project-item h3 { margin: 0 0 12px; font: 400 32px/1.15 Georgia, serif; letter-spacing: -.7px; scroll-margin-top: 32px; }
+.projects-page .project-item h3:target { color: var(--accent); text-decoration: none; }
+.project-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.project-company { display: flex; align-items: center; gap: 7px; margin: 0 0 14px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.project-company-name { display: inline-flex; align-items: center; gap: 7px; }
+.project-company img { flex-shrink: 0; width: 24px; height: 24px; object-fit: contain; }
+.project-url { display: inline-block; max-width: 100%; overflow-wrap: anywhere; font-size: 12px; text-decoration-color: var(--rule); }
+.project-url span { margin-left: 4px; color: var(--accent); }
+.projects-page .project-item-details ul { margin: 22px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.projects-page .project-item-details li { margin: 0 0 12px; }
+.projects-page .project-item-details li:last-child { margin-bottom: 0; }
+.projects-page .project-item-details li strong { color: var(--ink); font-weight: 700; }
+.projects-page .project-item-image { min-width: 0; display: flex; align-items: center; justify-content: center; padding: 24px; background: #e6e3d9; }
+.projects-page .project-item-image img { width: 100%; height: auto; max-height: 360px; object-fit: contain; border-radius: 0; filter: none; }
+.projects-page .project-image-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.projects-page .project-image-pair img { width: auto; max-width: 100%; justify-self: center; }
+.projects-page .only-text .project-item-details { grid-column: 1 / -1; max-width: 760px; }
+.projects-footer { display: flex; justify-content: space-between; padding: 30px 0 48px; font-size: 12px; color: var(--muted); }
+.projects-footer a { text-decoration: none; }
+.projects-skip { position: absolute; top: 8px; left: 8px; padding: 8px 16px; background: var(--ink); color: var(--paper) !important; transform: translateY(-200%); z-index: 10; }
+.projects-skip:focus { transform: translateY(0); }
+@media (max-width: 1100px) {
+  .project-map { grid-template-columns: minmax(0, 1fr); }
+  .project-map-key { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 12px; padding: 16px 0 0; border-left: 0; border-top: 1px solid var(--rule); }
+  .project-map-key a { min-height: 44px; }
+  .projects-page .project-item { gap: 36px; }
+}
+@media (max-width: 700px) {
+  .projects-content, .projects-footer { width: calc(100% - 40px); }
+  .projects-title-row { gap: 16px; }
+  .projects-title-row nav { flex-direction: column; gap: 0; font-size: 11px; flex-shrink: 0; }
+  .projects-title-row nav a { padding: 3px 0; }
+  .projects-intro { padding: 44px 0 36px; }
+  .projects-intro h1 { font-size: clamp(52px, 12vw, 72px); letter-spacing: -3px; }
+  .projects-deck { max-width: 30ch; font-size: 15px; }
+  .project-map { margin-bottom: 48px; padding-top: 20px; }
+  .project-map h2 { font-size: 27px; }
+  .project-map-chart { min-width: 280px; }
+  .project-map-grid text { font-size: 20px; }
+  .project-map-axes text { font-size: 24px; }
+  .project-map-point text { font-size: 20px; }
+  .project-map-dot { r: 18px; }
+  .project-map-key { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 8px; }
+  .project-map-key a { padding-inline: 0; font-size: 11px; gap: 4px; }
+  .projects-page .project-item { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 30px 0; }
+  .projects-page .project-item h3 { font-size: 29px; }
+  .projects-page .project-item-image { padding: 16px; }
+}
+@media (max-width: 480px) {
+  .project-map-grid text { font-size: 28px; }
+  .project-map-axes text { font-size: 32px; }
+  .project-map-point text { font-size: 26px; }
+  .project-map-dot { r: 22px; }
+}
+@media (max-width: 319px) {
+  .project-map-hint span { display: inline; }
+}

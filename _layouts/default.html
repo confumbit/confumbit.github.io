@@ -11,13 +11,18 @@
       media="screen"
       href="/assets/main.css"
     />
+    {% if page.stylesheet %}
+    <link rel="stylesheet" href="{{ page.stylesheet | relative_url }}" />
+    {% endif %}
     <script src="/assets/script.js" defer></script>
+    {% unless page.math == false %}
     <script
       type="text/javascript"
       id="MathJax-script"
       async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
     ></script>
+    {% endunless %}
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -33,9 +38,9 @@
       gtag("config", "G-DEHWKXZD9R");
     </script>
   </head>
-  <body>
+  <body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
     <!-- sidebar -->
-    {% include sidebar.html %}
+    {% unless page.hide_sidebar %}{% include sidebar.html %}{% endunless %}
 
     <!-- content -->
     {{ content }}

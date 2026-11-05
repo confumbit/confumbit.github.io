@@ -1,35 +1,72 @@
 ---
 layout: default
+math: false
 title: Software Projects
+stylesheet: /assets/projects.css
+body_class: projects-page
+hide_sidebar: true
 ---
 
-<!-- content -->
-<div class="content" style="align-items: flex-start">
-  <h1>Projects</h1>
-  <div class="project-list">
+<a class="projects-skip" href="#projects-main">Skip to content</a>
+<main class="projects-content" id="projects-main">
+  <section class="projects-intro" aria-labelledby="projects-title">
+    <header class="projects-title-row">
+      <h1 id="projects-title">Projects<span class="projects-period">.</span></h1>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/projects.html" aria-current="page">Projects</a>
+        <a href="/posts.html">Math posts</a>
+      </nav>
+    </header>
+    <p class="projects-deck">Experiments, useful tools, and things built for the web.</p>
+  </section>
+  {% include project-map.html %}
+  <section class="project-list" aria-label="Project details">
     {% for project in site.data.projects %}
-    <div
-      class="project-item {% if project.image_path == null %}only-text{% endif %}"
-    >
-      {% if project.image_path %}
-      <div class="project-item-image">
-        <img
-          src="{{ project.image_path }}"
-          alt="{{ project.name | append: ' preview image' }}"
-        />
-      </div>
-      {% endif %}
+    <article class="project-item {% if project.image_path == null %}only-text{% endif %}" aria-labelledby="project-{{ project.name | slugify }}">
       <div class="project-item-details">
-        <h3>{{ project.name }}</h3>
-        <a href="{{ project.url }}">{{ project.display_url }}</a>
+        <span class="project-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+        <h3 id="project-{{ project.name | slugify }}" tabindex="-1">{{ project.name }}</h3>
+        {% if project.company %}
+        <p class="project-company">
+          <span>For</span>
+          {% if project.company.url %}
+          <a class="project-company-name" href="{{ project.company.url }}" target="_blank" rel="noopener noreferrer">
+          {% else %}
+          <span class="project-company-name">
+          {% endif %}
+            <img src="{{ project.company.logo }}" alt="" width="24" height="24" loading="lazy" />
+            <span>{{ project.company.name | escape }}</span>
+          {% if project.company.url %}</a>{% else %}</span>{% endif %}
+        </p>
+        {% endif %}
+        {% if project.url or project.related_links %}
+        <div class="project-links">
+          {% if project.url %}
+          <a class="project-url" href="{{ project.url }}">{{ project.display_url }} <span aria-hidden="true">↗</span></a>
+          {% endif %}
+          {% for link in project.related_links %}
+          <a class="project-url" href="{{ link.url }}">{{ link.name | escape }} <span aria-hidden="true">↗</span></a>
+          {% endfor %}
+        </div>
+        {% endif %}
         <ul>
           {% for line in project.description %}
           <li>{{ line | strip }}</li>
           {% endfor %}
         </ul>
       </div>
-    </div>
-    <hr />
+      {% if project.image_path %}
+      <div class="project-item-image {% if project.additional_images %}project-image-pair{% endif %}">
+        {% assign project_image_alt = project.name | append: ' preview image' %}
+        <img src="{{ project.image_path }}" alt="{{ project.image_alt | default: project_image_alt | escape }}" loading="lazy" />
+        {% for image in project.additional_images %}
+        <img src="{{ image.path }}" alt="{{ image.alt | escape }}" loading="lazy" />
+        {% endfor %}
+      </div>
+      {% endif %}
+    </article>
     {% endfor %}
-  </div>
-</div>
+  </section>
+</main>
+<footer class="projects-footer"><a href="/">Hiten Dalmia</a><a href="#projects-title">Back to top ↑</a></footer>

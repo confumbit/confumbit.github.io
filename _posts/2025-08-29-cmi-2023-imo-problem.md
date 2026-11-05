@@ -1,5 +1,7 @@
 ---
 layout: post
+topic: Number theory
+preview: "Take a square root or add three: exploring which starting integers produce finite trajectories."
 title: A modified IMO 2017 problem.
 ---
 

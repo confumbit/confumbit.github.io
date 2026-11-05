@@ -1,36 +1,76 @@
-- name: Medicare Online Order
+# Subjective map coordinates, each on a 0–10 scale.
+# Complexity: engineering scope; interestingness: estimated personal enjoyment.
+# Enjoyment scores are provisional: playful experiments and exploration rank highly.
+- name: Medicare Order Procurement Portal
+  complexity: 8.5
+  interestingness: 6
   url: https://www.medicaregalaxy.in/
   display_url: medicaregalaxy.in
+  company:
+    name: Medicare Galaxy LLP
+    logo: /assets/medicare-galaxy-logo.jpg
   image_path: /assets/p11.png
   description:
-    - "Built a full-stack order placement portal for the company using NextJS with RESTful APIs."
-    - "Designed dual interfaces: customer-facing product ordering and an office-side order management system."
-    - "Designed the customer interface to display real-time product listings with current pricing and enable seamless order placement to logged-in users. The search feature is designed to perform a fuzzy-search on ~20,000 items."
-    - "The customer interface has Google Analytics and other custom analytics set up to track user behaviour, helping in planning future updates to the website."
-    - "Built the office interface as a comprehensive order management system, featuring employee assignment, activity logging, internal notes, and support for recurring orders."
-    - "Architected the system to ensure scalability, maintainability, and efficient data handling, leveraging PostgreSQL as the relational database."
+    - "Built a <strong>multi-source order ingestion</strong> and procurement platform, with <strong>ETL pipelines</strong> that consolidate retail orders, wholesale client orders, and unstructured WhatsApp medicine requests into a unified stream of standardized order records."
+    - "Applied <strong>NLP</strong> to process incoming WhatsApp messages, extract medicine requests, and convert them into structured orders linked to the corresponding medicines in the product catalogue."
+    - "Developed the data-processing backend using <strong>Node.js and Express</strong>, with <strong>PostgreSQL</strong> storing normalized order data and relationships between orders, medicines, and customers."
+    - "Created separate retail and business-client portals with distinct product listings and ordering requirements, including <strong>fuzzy search</strong> across approximately <strong>20,000 catalogue items</strong>. Both feed the same downstream order-processing pipeline."
+    - "Built an <strong>order-management ERP</strong> on top of the consolidated data, supporting order tracking, <strong>role-based user privileges</strong>, employee assignment, internal notes, per-order change logs, and recurring orders that automatically reschedule."
 
-- name: Cross-platform AR App
-  url: null
-  display_url: null
-  image_path: null
+- name: LOKA — Cross-platform AR App
+  complexity: 9.5
+  interestingness: 9
+  url: https://discoverloka.org/
+  display_url: discoverloka.org
+  company:
+    name: Tagglabs Experimental Pvt. Ltd.
+    logo: /assets/tagglabs-logo.jpg
+    url: https://www.tagglabs.in/
+  related_links:
+    - name: flutter_featurematching on pub.dev
+      url: https://pub.dev/packages/flutter_featurematching
+  image_path: /assets/loka-local-find.png
+  image_alt: "LOKA tag detail screen showing a local fruit vendor and community-added tags."
+  additional_images:
+    - path: /assets/loka-map.png
+      alt: "LOKA map screen showing nearby geo-tagged places."
   description:
-    - "Led the development of the alpha release of a cross-platform augmented reality, location-aware mobile app made with Flutter for Android and iOS."
-    - "Developed an internal package for Flutter during the project, integrating the SIFT algorithm for feature matching via native C APIs and the OpenCV library into the Flutter ecosystem."
-    - "Built the UI from Figma designs and a RESTful API with the backend using Django."
+    - "<strong>Led alpha development</strong> of LOKA, a location-aware augmented reality platform, focusing on <strong>computer vision</strong>, native-library integration, and backend web services."
+    - "Integrated <strong>SIFT-based image feature matching</strong> with <strong>OpenCV</strong> through <strong>native C APIs</strong>, connecting the <strong>computer vision</strong> implementation to the application."
+    - "Developed <strong>flutter_featurematching</strong>, a <strong>Dart/Flutter computer vision package</strong> that exposes native feature-matching functionality through a Dart interface."
+    - "Developed the application's <strong>Django backend</strong> and <strong>RESTful API</strong>."
 
+
+- name: KMC Logo on the Complex Plane
+  complexity: 4.5
+  interestingness: 9.3
+  url: /2025/05/28/kmc-logo.html
+  display_url: Read the mathematical write-up
+  image_path: /assets/graph-logo.png
+  image_alt: "Kirori Mal College's logo reconstructed on the complex plane using Fourier series."
+  description:
+    - "Reconstructed the Kirori Mal College logo on the complex plane using <strong>complex-valued Fourier series</strong>, turning its outlines into sums of rotating exponentials."
+    - "Used <strong>201 terms per series</strong> for sharper figures; the accompanying post lists the ten most heavily weighted terms, alongside equations for the simpler geometric elements."
+    - "Created with Prasoon Patel during our undergraduate studies in mathematics at Kirori Mal College, University of Delhi."
 
 - name: Randomness Challenge
+  complexity: 5.5
+  interestingness: 9.5
   url: https://randomnesschallenge-71zq.onrender.com/
   display_url: randomnesschallenge-71zq.onrender.com
   image_path: /assets/p1.png
   description:
-    - "A behavioural and statistical experiment that tests the ability of users to be random by asking them to click 6 identical buttons in a random fashion."
-    - "Uses different statistical methods to analyse the data collected, uses a REST API to store data in an Object Relational Database."
+    - "A <strong>behavioural and statistical experiment</strong> that tests the ability of users to be random by asking them to click 6 identical buttons in a random fashion."
+    - "Uses different <strong>statistical methods</strong> to analyse the data collected, uses a <strong>REST API</strong> to store data in an <strong>Object Relational Database</strong>."
 
 - name: Cz Creation E-commerce Shop
+  complexity: 7
+  interestingness: 4.5
   url: https://czcreation.onrender.com/
   display_url: czcreation.onrender.com
+  company:
+    name: CZ Creation
+    logo: /assets/cz-creation-logo.png
   image_path: /assets/p2.jpg
   description:
     - "A fully fledged e-commerce website for a small business taking their products online."
@@ -38,8 +78,13 @@
     - "Made using MERN stack, hosted on Heroku."
 
 - name: Shri Ram Consulting & Research Centre Website
+  complexity: 3
+  interestingness: 4
   url: https://www.srcrc.in/
   display_url: srcrc.in
+  company:
+    name: Shri Ram Consulting & Research Centre
+    logo: /assets/srcrc-logo.png
   image_path: /assets/p5.png
   description:
     - "I made this homepage for SRCRC through the freelance agency - Fractal."
@@ -47,6 +92,8 @@
     - "Made using NextJS, Typescript and TailwindCSS"
 
 - name: Medcheck
+  complexity: 5
+  interestingness: 6.5
   url: https://github.com/confumbit/medcheck
   display_url: github.com/confumbit/medcheck
   image_path: /assets/p8.jpeg
@@ -55,20 +102,33 @@
     - "Made using React Native."
 
 - name: Fractal Homepage
+  complexity: 2.5
+  interestingness: 3
   url: https://fractalweb.netlify.app/
   display_url: fractalweb.netlify.app
+  company:
+    name: Fractal
+    logo: /assets/fractal-logo.png
   image_path: /assets/p7.png
   description:
     - "A ReactJS homepage for Fractal, a freelance media agency for whom I have previously worked on other projects."
 
 - name: Kombucha Product Placement
+  complexity: 4
+  interestingness: 7.8
   url: https://confumbit.github.io/dualite-work/
   display_url: confumbit.github.io/dualite-work
+  company:
+    name: Mountain Tribe Foods Private Limited
+    logo: /assets/tribe-kombucha-logo.png
+    url: https://tribekombucha.in/
   image_path: /assets/p12.png
   description:
     - "A interactive web page made using vanilla Javascript with smooth and appealing animations to advertise products. Makes sure that the experience of looking at your creations is as fun as the products themselves."
 
 - name: a blog
+  complexity: 4.8
+  interestingness: 4.7
   url: https://ablogblog.onrender.com/
   display_url: ablogblog.onrender.com
   image_path: /assets/p10.png
@@ -76,6 +136,8 @@
     - "My blog that I run with 2 other people made using NodeJS and EJS templates."
 
 - name: Wedding Menu
+  complexity: 2
+  interestingness: 5.7
   url: https://confumbit.github.io/wedding-menu/
   display_url: confumbit.github.io/wedding-menu
   image_path: /assets/p3.jpg
@@ -84,6 +146,8 @@
     - "Made using vanilla HTML, CSS and Javascript."
 
 - name: Treasty Social Gateway
+  complexity: 1.5
+  interestingness: 3.8
   url: https://confumbit.github.io/treasty-webpage/
   display_url: confumbit.github.io/treasty-webpage
   image_path: /assets/p4.jpg
@@ -92,6 +156,8 @@
     - "Made using vanilla HTML, CSS and Javascript."
 
 - name: Kanye Fun
+  complexity: 2.8
+  interestingness: 6.8
   url: https://confumbit.github.io/kanye-fun/
   display_url: confumbit.github.io/kanye-fun
   image_path: /assets/p6.png
@@ -99,6 +165,8 @@
     - "A fun little project made with ReactJS using the kanye.rest API, to show Kanye's sacred words in a more decorated setting made while listening to Kanye's godly voice."
 
 - name: Burn
+  complexity: 1.5
+  interestingness: 2
   url: https://confumbit.github.io/burn-webpagedesigning-comp/
   display_url: confumbit.github.io/burn-webpagedesigning-comp
   image_path: /assets/p9.png
@@ -107,6 +175,8 @@
     - "Made using vanilla HTML, CSS and Javascript."
 
 - name: Breeze
+  complexity: 5.8
+  interestingness: 8
   url: https://github.com/confumbit/Breeze
   display_url: github.com/confumbit/Breeze
   image_path: null
@@ -114,6 +184,8 @@
     - "It is a simple python and tkinter application for attendance using OCR for google meet, it is optimized for a certain screen resolution but you could change that in the code."
 
 - name: Todoist
+  complexity: 3.7
+  interestingness: 3.3
   url: https://github.com/confumbit/todoist
   display_url: github.com/confumbit/todoist
   image_path: null

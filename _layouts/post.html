@@ -11,6 +11,7 @@
       media="screen"
       href="/assets/main.css"
     />
+    <link rel="stylesheet" href="/assets/posts.css" />
     <script src="/assets/script.js" defer></script>
     <script
       type="text/javascript"
@@ -33,15 +34,22 @@
       gtag("config", "G-DEHWKXZD9R");
     </script>
   </head>
-  <body>
-    <!-- sidebar -->
-    {% include sidebar.html %}
-
-    <!-- content -->
-    <div class="content" style="align-items: flex-start">
-      <h1>{{ page.title }}</h1>
-      <h5>Published on {{page.date | date_to_string}}</h5>
-      {{ content }}
-    </div>
+  <body class="posts-page post-page">
+    <main class="math-content post-content" id="main">
+      <nav class="post-navigation" aria-label="Main navigation">
+        <a href="/">Home</a><a href="/projects.html">Projects</a><a href="/posts.html">Math posts</a>
+      </nav>
+      <article>
+        <header class="post-header">
+          <div class="post-preview-meta">
+            {% if page.topic %}<span>{{ page.topic }}</span>{% endif %}
+            <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%d %B %Y" }}</time>
+          </div>
+          <h1>{{ page.title }}</h1>
+        </header>
+        <div class="post-body">{{ content }}</div>
+      </article>
+      <footer class="post-footer"><a href="/posts.html">← All math posts</a><a href="#main">Back to top ↑</a></footer>
+    </main>
   </body>
 </html>

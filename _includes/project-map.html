@@ -1,0 +1,54 @@
+<figure class="project-map" aria-labelledby="project-map-title">
+  <figcaption>
+    <h2 id="project-map-title">A map of my projects</h2>
+  </figcaption>
+  <p class="project-map-hint">Choose a point or a name to explore a project. <span>Swipe the graph to see the full map.</span></p>
+  <div class="project-map-scroll" tabindex="0" role="region" aria-label="Project scatter plot">
+    <svg class="project-map-chart" viewBox="0 0 880 500" role="group" aria-labelledby="project-chart-title project-chart-description">
+      <title id="project-chart-title">Interestingness versus software complexity</title>
+      <desc id="project-chart-description">All {{ site.data.projects | size }} software projects, numbered to match the key below. Each point links to its project description. The key also gives both scores as text.</desc>
+      <defs>
+        <marker id="project-axis-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M 1 1 L 6 4 L 1 7" fill="none" stroke="currentColor" stroke-width="1.2" />
+        </marker>
+      </defs>
+      <g class="project-map-grid" aria-hidden="true">
+        {% for tick in (0..5) %}
+        {% assign value = tick | times: 2 %}
+        {% assign x = value | times: 74 | plus: 80 %}
+        {% assign y = value | times: -36 | plus: 420 %}
+        <line x1="{{ x }}" y1="60" x2="{{ x }}" y2="420" />
+        <line x1="80" y1="{{ y }}" x2="820" y2="{{ y }}" />
+        <text x="{{ x }}" y="447" text-anchor="middle">{{ value }}</text>
+        <text x="63" y="{{ y | plus: 5 }}" text-anchor="end">{{ value }}</text>
+        {% endfor %}
+      </g>
+      <g class="project-map-axes" aria-hidden="true">
+        <path d="M 80 420 V 40" fill="none" marker-end="url(#project-axis-arrow)" />
+        <path d="M 80 420 H 842" fill="none" marker-end="url(#project-axis-arrow)" />
+        <text x="450" y="485" text-anchor="middle">Software complexity</text>
+        <text transform="translate(23 240) rotate(-90)" text-anchor="middle">Interestingness</text>
+      </g>
+      {% for project in site.data.projects %}
+      {% assign x = project.complexity | times: 74 | plus: 80 %}
+      {% assign y = project.interestingness | times: -36 | plus: 420 %}
+      <a class="project-map-point" href="#project-{{ project.name | slugify }}" data-project-number="{{ forloop.index }}" aria-label="{{ project.name | escape }}: complexity {{ project.complexity }}, interestingness {{ project.interestingness }}. Go to project.">
+        <title>{{ project.name | escape }} · complexity {{ project.complexity }} · interestingness {{ project.interestingness }}</title>
+        <circle class="project-map-hit" cx="{{ x }}" cy="{{ y }}" r="22" />
+        <circle class="project-map-dot" cx="{{ x }}" cy="{{ y }}" r="14" />
+        <text x="{{ x }}" y="{{ y }}" dy=".35em" text-anchor="middle" aria-hidden="true">{{ forloop.index }}</text>
+      </a>
+      {% endfor %}
+    </svg>
+  </div>
+  <ol class="project-map-key" aria-label="Project map key; scores are out of 10">
+    {% for project in site.data.projects %}
+    <li>
+      <a href="#project-{{ project.name | slugify }}" data-project-number="{{ forloop.index }}">
+        <span class="project-map-number" aria-hidden="true">{{ forloop.index }}</span>
+        <span>{{ project.name }}<small>Complexity {{ project.complexity }} · Interest {{ project.interestingness }}</small></span>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+</figure>

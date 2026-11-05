@@ -1,40 +1,48 @@
 ---
 layout: default
 title: Math Posts
+stylesheet: /assets/posts.css
+body_class: posts-page
+hide_sidebar: true
 ---
-
-<div class="content" style="align-items: flex-start">
-  <h1>Posts</h1>
-  <ol class="title-list">
-    {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ol>
-  <h3>Articles</h3>
-  <ol>
-    {% for article in site.data.math-articles %}
-    <li>
-      <a href="{{ article.src }}">
-        {{ article.title }}.
-        <span style="font-weight: 400; font-style: italic; font-size: smaller"
-          >{{ article.journal }}</span
-        >
-        <br />
-        <span style="font-weight: 400; font-size: small"
-          >Author(s): {{ article.authors | join:", " }}</span
-        >
-      </a>
-    </li>
-    {% endfor %}
-  </ol>
-  <!-- <h3>Projects</h3>
-  <ol>
-    {% for project in site.data.math-project %}
-    <li>
-      <a href="{{ project.src }}">{{ project.title }}. </a>
-    </li>
-    {% endfor %}
-  </ol> -->
-</div>
+<main class="math-content" id="main">
+  <header class="math-intro">
+    <nav aria-label="Main navigation">
+      <a href="/">Home</a><a href="/projects.html">Projects</a><a href="/posts.html" aria-current="page">Math posts</a>
+    </nav>
+    <h1><span class="math-sr-only">Math Posts</span>{% include math-title.svg %}</h1>
+    <div class="math-caption">
+      <p>This title is traced using <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank" rel="noopener noreferrer">Bézier curves</a>, built by repeatedly interpolating between control points. The moving construction follows de Casteljau’s algorithm. I realise this looks quite similar to 3b1b's animations, I have not looked at his Manim library but I imagine it uses a similar technique for animations.</p>
+      <button class="math-replay" type="button" hidden>Replay <span aria-hidden="true">↺</span></button>
+    </div>
+  </header>
+  <section class="math-section" aria-labelledby="articles-heading">
+    <h2 id="articles-heading">Articles</h2>
+    <ol class="math-list">
+      {% for article in site.data.math-articles %}
+      <li><a href="{{ article.src }}">{{ article.title }}</a>
+        {% if article.journal != empty %}<p class="math-publication">{{ article.journal }}</p>{% endif %}
+        <p class="math-authors">{{ article.authors | join: ", " }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  <section class="math-section" aria-labelledby="posts-heading">
+    <h2 id="posts-heading">Posts</h2>
+    <ol class="math-list post-previews">
+      {% for post in site.posts %}
+      <li>
+        <article class="post-preview">
+          <div class="post-preview-meta">
+            {% if post.topic %}<span>{{ post.topic }}</span>{% endif %}
+            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%d %b %Y" }}</time>
+          </div>
+          <h3><a href="{{ post.url }}">{{ post.title }}<span class="post-preview-arrow" aria-hidden="true"> ↗</span></a></h3>
+          <p>{{ post.preview | default: post.excerpt | strip_html | truncatewords: 36 }}</p>
+        </article>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+</main>
+<script src="{{ '/assets/posts.js' | relative_url }}" defer></script>
