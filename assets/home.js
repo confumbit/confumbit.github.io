@@ -42,7 +42,9 @@ function pump(){
 }
 worker.onmessage=({data})=>{
  busy=false;
- if(data.version===version&&data.bw===bandwidthMHz()){ctx.putImageData(new ImageData(new Uint8ClampedArray(data.pixels),data.W,data.H),0,0);lastBandwidth=data.bw;}
+ // A completed frame can trail the moving slider. Display it while the next
+ // value is processed; reject only frames from an obsolete canvas layout.
+ if(data.version===version){ctx.putImageData(new ImageData(new Uint8ClampedArray(data.pixels),data.W,data.H),0,0);lastBandwidth=data.bw;}
  pump();
 };
 
