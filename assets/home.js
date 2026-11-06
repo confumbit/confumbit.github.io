@@ -6,7 +6,9 @@ const pageStyle=getComputedStyle(document.documentElement);
 const COLORS=Object.fromEntries(['background','text','muted','rule','accent','panel','panel-active'].map(key=>[key,pageStyle.getPropertyValue('--'+key).trim()]));
 // Simplified component-video bandwidth model: FFT filtering of YIQ scanlines.
 // No RF, composite modulation, interlacing, or phosphor simulation.
-const canvas=document.querySelector('#picture'),ctx=canvas.getContext('2d');
+const canvas=document.querySelector('#picture'),displayContext=canvas.getContext('2d');
+// Never paint the sharp source into the displayed canvas while filtering runs.
+const sourceCanvas=document.createElement('canvas'),ctx=sourceCanvas.getContext('2d');
 const slider=document.querySelector('#bandwidth'),links=[...document.querySelectorAll('nav a')];
 // Each tab gets the 0.5 MHz introduction once; subsequent home visits use full bandwidth.
 const homeVisitKey='hiten-home-visited';
@@ -44,7 +46,12 @@ worker.onmessage=({data})=>{
  busy=false;
  // A completed frame can trail the moving slider. Display it while the next
  // value is processed; reject only frames from an obsolete canvas layout.
- if(data.version===version){ctx.putImageData(new ImageData(new Uint8ClampedArray(data.pixels),data.W,data.H),0,0);lastBandwidth=data.bw;}
+ if(data.version===version){
+  if(canvas.width!==data.W)canvas.width=data.W;
+  if(canvas.height!==data.H)canvas.height=data.H;
+  displayContext.putImageData(new ImageData(new Uint8ClampedArray(data.pixels),data.W,data.H),0,0);
+  lastBandwidth=data.bw;
+ }
  pump();
 };
 
@@ -123,7 +130,10 @@ function draw(){
  const nameY=Math.max(controlsBottom+(W<540?48:72),innerHeight*.52-profileHeight/2);
  const bioY=nameY+nameSize+24,contactY=bioY+bioHeight+24;
  const navY=contactY+contactHeight+32;
- H=Math.ceil(Math.max(innerHeight,navY+menuHeight+32));if(canvas.width!==W)canvas.width=W;if(canvas.height!==H)canvas.height=H;
+ H=Math.ceil(Math.max(innerHeight,navY+menuHeight+32));
+ if(sourceCanvas.width!==W)sourceCanvas.width=W;
+ if(sourceCanvas.height!==H)sourceCanvas.height=H;
+ canvas.style.height=H+'px';
  ctx.fillStyle=COLORS.background;ctx.fillRect(0,0,W,H);ctx.textBaseline='top';ctx.font=size+'px '+TYPE.body;ctx.fillStyle=COLORS.muted;
  ctx.textAlign='left';
  const introOverlays=document.querySelector('#intro-links');introOverlays.replaceChildren();
